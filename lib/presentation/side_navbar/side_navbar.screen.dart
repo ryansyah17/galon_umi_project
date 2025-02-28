@@ -3,6 +3,7 @@ import 'package:galon_umi_project/domain/core/assets/app_images.dart';
 import 'package:galon_umi_project/infrastructure/theme/constant/colors.dart';
 import 'package:galon_umi_project/infrastructure/theme/extensions/extensions.dart';
 import 'package:galon_umi_project/presentation/home/home.screen.dart';
+import 'package:galon_umi_project/presentation/quick_pos/quick_pos.screen.dart';
 
 import 'package:get/get.dart';
 
@@ -13,8 +14,8 @@ class SideNavbarScreen extends GetView<SideNavbarController> {
   SideNavbarScreen({super.key});
 
   final List<Widget> _pages = [
+    const QuickPosScreen(),
     const HomeScreen(),
-    const Text('Widgets 1'),
     const Text('Widgets 2'),
     const Text('Widgets 3'),
     const Text('Widgets 4')
@@ -53,7 +54,7 @@ class SideNavbarScreen extends GetView<SideNavbarController> {
                                           ? AppColors.disabled.withOpacity(0.4)
                                           : Colors.transparent,
                                       child: NavItem(
-                                        iconPath: AppImages.iconHome,
+                                        iconPath: AppImages.iconPos,
                                         index:
                                             controller.selectedIndex.value == 0,
                                         onTap: () => controller.onItemTapped(0),

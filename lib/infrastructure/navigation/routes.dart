@@ -7,4 +7,5 @@ class Routes {
   static const HOME = '/home';
   static const SIDE_NAVBAR = '/side-navbar';
   static const SPLASH = '/splash';
+  static const QUICK_POS = '/quick-pos';
 }

@@ -4,18 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyle {
   static TextStyle heading1 = GoogleFonts.poppins(
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
   );
 
   static TextStyle bodyText = GoogleFonts.poppins(
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.black,
   );
   static TextStyle subBodyText = GoogleFonts.poppins(
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.black,
   );

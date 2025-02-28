@@ -1,4 +1,6 @@
 class Customer {
   String name;
-  Customer(this.name);
+  String noHp;
+  int riwayatPesanan;
+  Customer(this.name, this.noHp, this.riwayatPesanan);
 }

@@ -41,5 +41,10 @@ class Nav {
       page: () => const SplashScreen(),
       binding: SplashControllerBinding(),
     ),
+    GetPage(
+      name: Routes.QUICK_POS,
+      page: () => const QuickPosScreen(),
+      binding: QuickPosControllerBinding(),
+    ),
   ];
 }
