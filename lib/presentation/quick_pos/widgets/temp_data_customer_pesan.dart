@@ -56,51 +56,59 @@ class TempDataCustomerPesan extends StatelessWidget {
                   width: double.infinity,
                   color: AppColors.black,
                 ),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Diskon',
+                //       style: AppTextStyle.bodyText,
+                //     ),
+                //     SizedBox(
+                //       width: 200,
+                //       height: 40,
+                //       child: TextField(
+                //         textAlign: TextAlign.center,
+                //         keyboardType: TextInputType.number,
+                //         decoration: InputDecoration(
+                //           contentPadding: EdgeInsets.all(10),
+                //           border: OutlineInputBorder(),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 10), // Tambahkan sedikit padding
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Metode Bayar',
+                //       style: AppTextStyle.bodyText,
+                //     ),
+                //     SizedBox(
+                //       width: 200,
+                //       height: 40,
+                //       child: TextField(
+                //         textAlign: TextAlign.center,
+                //         keyboardType: TextInputType.number,
+                //         decoration: InputDecoration(
+                //           contentPadding: EdgeInsets.all(10),
+                //           border: OutlineInputBorder(),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(height: 10), // Tambahkan sedikit padding
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Diskon',
-                      style: AppTextStyle.bodyText,
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 40,
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
+
+                Text(
+                  '*Jika total bayar tidak diinput, maka status pemesanan akan otomatis menjadi "Belum Lunas"',
+                  style: AppTextStyle.subBodyText.copyWith(
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
-                SizedBox(height: 10), // Tambahkan sedikit padding
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Metode Bayar',
-                      style: AppTextStyle.bodyText,
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 40,
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10), // Tambahkan sedikit padding
+                SizedBox(height: 30), // Tambahkan sedikit padding
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -193,37 +201,32 @@ class TempDataCustomerPesan extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: Text(label, style: AppTextStyle.bodyText)),
-        SizedBox(
-          width: Get.width * 0.30,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                  icon: const Icon(Icons.remove, size: 30),
-                  onPressed: onDecrement),
-              SizedBox(
-                width: 80,
-                height: 40,
-                child: Obx(() {
-                  final controller =
-                      TextEditingController(text: counter.string);
-                  return TextField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    controller: controller,
-                    onChanged: onChanged,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
-                      border: OutlineInputBorder(),
-                    ),
-                  );
-                }),
-              ),
-              IconButton(
-                  icon: const Icon(Icons.add, size: 30),
-                  onPressed: onIncrement),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+                icon: const Icon(Icons.remove, size: 30),
+                onPressed: onDecrement),
+            SizedBox(
+              width: 60,
+              height: 40,
+              child: Obx(() {
+                final controller = TextEditingController(text: counter.string);
+                return TextField(
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  controller: controller,
+                  onChanged: onChanged,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(),
+                  ),
+                );
+              }),
+            ),
+            IconButton(
+                icon: const Icon(Icons.add, size: 30), onPressed: onIncrement),
+          ],
         ),
         Container(
           padding: EdgeInsets.all(10),

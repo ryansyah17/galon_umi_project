@@ -46,5 +46,15 @@ class Nav {
       page: () => const QuickPosScreen(),
       binding: QuickPosControllerBinding(),
     ),
+    GetPage(
+      name: Routes.AKUN,
+      page: () => const AkunScreen(),
+      binding: AkunControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.LAPORAN,
+      page: () => const LaporanScreen(),
+      binding: LaporanControllerBinding(),
+    ),
   ];
 }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:galon_umi_project/domain/core/assets/app_images.dart';
 import 'package:galon_umi_project/infrastructure/theme/constant/colors.dart';
 import 'package:galon_umi_project/infrastructure/theme/extensions/extensions.dart';
+import 'package:galon_umi_project/presentation/akun/akun.screen.dart';
 import 'package:galon_umi_project/presentation/home/home.screen.dart';
+import 'package:galon_umi_project/presentation/laporan/laporan.screen.dart';
 import 'package:galon_umi_project/presentation/quick_pos/quick_pos.screen.dart';
 
 import 'package:get/get.dart';
@@ -16,9 +18,8 @@ class SideNavbarScreen extends GetView<SideNavbarController> {
   final List<Widget> _pages = [
     const QuickPosScreen(),
     const HomeScreen(),
-    const Text('Widgets 2'),
-    const Text('Widgets 3'),
-    const Text('Widgets 4')
+    const LaporanScreen(),
+    const AkunScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -92,10 +93,29 @@ class SideNavbarScreen extends GetView<SideNavbarController> {
                                           ? AppColors.disabled.withOpacity(0.4)
                                           : Colors.transparent,
                                       child: NavItem(
-                                        iconPath: AppImages.iconHome,
+                                        iconPath: AppImages.iconReport,
                                         index:
                                             controller.selectedIndex.value == 2,
                                         onTap: () => controller.onItemTapped(2),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Obx(
+                                () => Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: ColoredBox(
+                                      color: controller.selectedIndex.value == 3
+                                          ? AppColors.disabled.withOpacity(0.4)
+                                          : Colors.transparent,
+                                      child: NavItem(
+                                        iconPath: AppImages.iconProfile,
+                                        index:
+                                            controller.selectedIndex.value == 3,
+                                        onTap: () => controller.onItemTapped(3),
                                       ),
                                     ),
                                   ),

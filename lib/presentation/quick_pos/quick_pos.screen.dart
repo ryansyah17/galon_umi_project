@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:galon_umi_project/presentation/home/widgets/card_title.dart';
+import 'package:galon_umi_project/presentation/quick_pos/widgets/card_status_pemesanan.dart';
 import 'package:galon_umi_project/presentation/quick_pos/widgets/temp_data_customer_pesan.dart';
 
 import 'package:get/get.dart';
@@ -35,8 +37,10 @@ class QuickPosScreen extends GetView<QuickPosController> {
                   children: [
                     //left side
                     leftSide(context, controller),
-                    getWidthBox(size: 5, context: context),
+                    SizedBox(width: 10),
                     //right side
+                    centerSide(context, controller),
+                    SizedBox(width: 10),
                     rightSide(context, controller),
                   ],
                 ),
@@ -171,7 +175,7 @@ class QuickPosScreen extends GetView<QuickPosController> {
     );
   }
 
-  Widget rightSide(BuildContext context, QuickPosController controller) {
+  Widget centerSide(BuildContext context, QuickPosController controller) {
     return Expanded(
       flex: 3,
       child: Container(
@@ -188,6 +192,35 @@ class QuickPosScreen extends GetView<QuickPosController> {
             titlePemesanan(context, controller),
             Expanded(
               child: TempDataCustomerPesan(controller: controller),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget rightSide(BuildContext context, QuickPosController controller) {
+    return Expanded(
+      flex: 2,
+      child: Container(
+        height: context.deviceHeight,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        child: Column(
+          children: [
+            CardTitle(title: 'Status Pemesanan', seeAll: false),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return CardStatusPemesanan();
+                },
+              ),
             ),
           ],
         ),
