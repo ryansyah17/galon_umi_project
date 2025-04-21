@@ -3,9 +3,12 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 
+import '../../../domain/entity/other/keranjng_produk.dart';
 import '../../../domain/entity/other/mock_customer_model.dart';
 
 class QuickPosController extends GetxController {
+  RxList<Produk> produkDibeli = <Produk>[].obs;
+
   // Daftar customer
   var customers = <Customer>[].obs;
   // Customer yang dipilih

@@ -5,6 +5,7 @@ import 'package:galon_umi_project/presentation/quick_pos/widgets/temp_data_custo
 
 import 'package:get/get.dart';
 
+import '../../domain/entity/other/keranjng_produk.dart';
 import '../../infrastructure/theme/constant/colors.dart';
 import '../../infrastructure/theme/constant/text_style.dart';
 import '../../infrastructure/theme/extensions/custom_appbar.dart';
@@ -41,7 +42,7 @@ class QuickPosScreen extends GetView<QuickPosController> {
                     //right side
                     centerSide(context, controller),
                     SizedBox(width: 10),
-                    rightSide(context, controller),
+                    // rightSide(context, controller),
                   ],
                 ),
               ),
@@ -81,7 +82,7 @@ class QuickPosScreen extends GetView<QuickPosController> {
                 spacing: 10,
                 children: [
                   Text(
-                    'Data Pelanggan',
+                    'Select Produk',
                     style: AppTextStyle.heading1.copyWith(
                       color: AppColors.white,
                     ),
@@ -94,7 +95,7 @@ class QuickPosScreen extends GetView<QuickPosController> {
                         color: AppColors.white,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'Cari Customer...',
+                        hintText: 'Cari Produk...',
                         hintStyle: AppTextStyle.bodyText.copyWith(
                           color: AppColors.white,
                         ),
@@ -141,7 +142,7 @@ class QuickPosScreen extends GetView<QuickPosController> {
                           ),
                           child: Center(
                             child: Text(
-                              'New Customer',
+                              'New Produk',
                               style: AppTextStyle.bodyText.copyWith(
                                 color: AppColors.white,
                               ),
@@ -157,18 +158,98 @@ class QuickPosScreen extends GetView<QuickPosController> {
             ),
 
             // List Customer
+            // Expanded(
+            //   child: Obx(
+            //     () => ListView.builder(
+            //       itemCount: controller.filteredCustomers.length,
+            //       itemBuilder: (context, index) {
+            //         final customer = controller.filteredCustomers[index];
+            //         return CardCustomer(
+            //             customer: customer, controller: controller);
+            //       },
+            //     ),
+            //   ),
+            // ),
             Expanded(
-              child: Obx(
-                () => ListView.builder(
-                  itemCount: controller.filteredCustomers.length,
-                  itemBuilder: (context, index) {
-                    final customer = controller.filteredCustomers[index];
-                    return CardCustomer(
-                        customer: customer, controller: controller);
-                  },
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: 3,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.1,
                 ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      final produk =
+                          Produk(nama: 'Nama produk $index', harga: 54000);
+                      final existingIndex = controller.produkDibeli
+                          .indexWhere((p) => p.nama == produk.nama);
+
+                      if (existingIndex != -1) {
+                        controller.produkDibeli[existingIndex].jumlah++;
+                        controller.produkDibeli
+                            .refresh(); // karena jumlahnya bertambah
+                      } else {
+                        controller.produkDibeli.add(produk);
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [defaultBoxShadow1],
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 20,
+                            right: 20,
+                            top: 0,
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Nama produk',
+                                  style: AppTextStyle.bodyText,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    Icons.shopping_bag,
+                                    size: 20,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
-            ),
+            )
           ],
         ),
       ),

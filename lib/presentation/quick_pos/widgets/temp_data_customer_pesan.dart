@@ -23,25 +23,90 @@ class TempDataCustomerPesan extends StatelessWidget {
               children: [
                 Text('Data Customer', style: AppTextStyle.heading1),
                 SizedBox(height: 10),
-                _buildCustomerInfo(
-                    'Nama : ', () => controller.selectedCustomer.value.name,
-                    isPrimary: true),
-                _buildCustomerInfo('Nomor HandPhone : ',
-                    () => controller.selectedCustomer.value.noHp),
-                _buildCustomerInfo(
-                    'Riwayat pesanan : ',
-                    () =>
-                        '${controller.selectedCustomer.value.riwayatPesanan}X pesanan',
-                    isPrimary: true,
-                    isBottom: true),
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Select Customer',
+                        style: AppTextStyle.bodyText.copyWith(
+                          color: AppColors.white,
+                        ),
+                      ),
+                      Container(
+                        height: 40,
+                        width: 250,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Dropdown customer default customer',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: 10),
-                _buildCounterInput(
-                    'Isi Ulang',
-                    controller.count,
-                    controller.increment,
-                    controller.decrement,
-                    '7.000',
-                    controller.setValue),
+                Obx(() => Column(
+                      children: controller.produkDibeli.map((produk) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [defaultBoxShadow1],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(produk.nama, style: AppTextStyle.bodyText),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.remove),
+                                    onPressed: () {
+                                      if (produk.jumlah > 1) {
+                                        produk.jumlah--;
+                                      } else {
+                                        controller.produkDibeli.remove(produk);
+                                      }
+                                      controller.produkDibeli.refresh();
+                                    },
+                                  ),
+                                  Text('${produk.jumlah}',
+                                      style: AppTextStyle.bodyText),
+                                  IconButton(
+                                    icon: Icon(Icons.add),
+                                    onPressed: () {
+                                      produk.jumlah++;
+                                      controller.produkDibeli.refresh();
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Text('Rp ${produk.harga}',
+                                  style: AppTextStyle.bodyText),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    )),
+
                 SizedBox(height: 10),
                 _buildCounterInput(
                     'Beli Galon',
@@ -56,50 +121,52 @@ class TempDataCustomerPesan extends StatelessWidget {
                   width: double.infinity,
                   color: AppColors.black,
                 ),
-
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'Diskon',
-                //       style: AppTextStyle.bodyText,
-                //     ),
-                //     SizedBox(
-                //       width: 200,
-                //       height: 40,
-                //       child: TextField(
-                //         textAlign: TextAlign.center,
-                //         keyboardType: TextInputType.number,
-                //         decoration: InputDecoration(
-                //           contentPadding: EdgeInsets.all(10),
-                //           border: OutlineInputBorder(),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: 10), // Tambahkan sedikit padding
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'Metode Bayar',
-                //       style: AppTextStyle.bodyText,
-                //     ),
-                //     SizedBox(
-                //       width: 200,
-                //       height: 40,
-                //       child: TextField(
-                //         textAlign: TextAlign.center,
-                //         keyboardType: TextInputType.number,
-                //         decoration: InputDecoration(
-                //           contentPadding: EdgeInsets.all(10),
-                //           border: OutlineInputBorder(),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Diskon',
+                      style: AppTextStyle.bodyText,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 40,
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10), // Tambahkan sedikit padding
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Metode Bayar',
+                      style: AppTextStyle.bodyText,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: 40,
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 10), // Tambahkan sedikit padding
 
                 Text(
